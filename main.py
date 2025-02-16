@@ -84,8 +84,8 @@ def main(game_mode=None):
 
         elif game_mode == "one_player_mouse":
             # Single-player alternates paddle control using Mouse
-            mouse_y = pygame.mouse.get_pos()[1]  # Get the mouse's vertical position
-            control_paddle.move_to(mouse_y)  # Center the paddle around the mouse's Y position
+            mouse_y = pygame.mouse.get_pos()[1]  #Get the mouse's vertical position
+            control_paddle.move_to(mouse_y)  #Center the paddle around the mouse's Y position
 
         elif game_mode =="two_players":  # Two-player mode
             if keys[pygame.K_w]:
