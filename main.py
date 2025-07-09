@@ -9,49 +9,35 @@ from game_objects.paddle import Paddle
 from game_objects.ball import Ball
 from utils.helper import draw_dotted_line, show_countdown
 
-# Initialize Pygame
 pygame.init()
-
-# Initialize Pygame Mixer
 pygame.mixer.init()
 
 # Screen setup
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Pong Game")
 
-# Clock for frame rate control
 clock = pygame.time.Clock()
 
 def resource_path(relative_path):
-    """
-    Get the absolute path to a resource, works for development and PyInstaller.
-    """
-    # If running in a PyInstaller bundle
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
-    # In development
     return os.path.join(os.path.abspath("."), relative_path)
 
 paddle_hit_sound = pygame.mixer.Sound(resource_path("sounds/paddle_hit_sound.wav"))
 wall_hit_sound = pygame.mixer.Sound(resource_path("sounds/wall_hit_sound.wav"))
 
 # Optional: Adjust volume if needed
-paddle_hit_sound.set_volume(0.5)  # Set volume to 50%
-wall_hit_sound.set_volume(0.5)    # Set volume to 50%
+paddle_hit_sound.set_volume(0.5)  
+wall_hit_sound.set_volume(0.5)  
 
-
-# Main function
 def main(game_mode=None):
     global left_score, right_score
-
-    # If no game mode is provided, show the start screen
     if not game_mode:
         game_mode = show_start_screen(screen)
         if not game_mode:
             pygame.quit()
             return
-
-    # Show countdown before the game starts
+        
     show_countdown(screen)
 
     # Initialize paddles, ball, and scores
@@ -72,18 +58,15 @@ def main(game_mode=None):
             if event.type == pygame.QUIT:
                 running = False
 
-        # Paddle movement
         keys = pygame.key.get_pressed()
 
-        if game_mode == "one_player_keyboard":
-            # Single-player alternates paddle control using Keyboard
+        if game_mode == "one_player_keyboard":  # Single-player mode
             if keys[pygame.K_UP]:
                 control_paddle.move_up()
             if keys[pygame.K_DOWN]:
                 control_paddle.move_down()
 
         elif game_mode == "one_player_mouse":
-            # Single-player alternates paddle control using Mouse
             mouse_y = pygame.mouse.get_pos()[1]  #Get the mouse's vertical position
             control_paddle.move_to(mouse_y)  #Center the paddle around the mouse's Y position
 
@@ -115,14 +98,14 @@ def main(game_mode=None):
         # Ball respawn and reset logic
         if ball.rect.left <= 0:
             right_score += 1
-            ball.reset(1)  # Reset ball position to the center, moving to the right
-            left_paddle.reset_speed()  # Reset left paddle speed
-            right_paddle.reset_speed()  # Reset right paddle speed
+            ball.reset(1) 
+            left_paddle.reset_speed()  
+            right_paddle.reset_speed()  
         elif ball.rect.right >= SCREEN_WIDTH:
             left_score += 1
-            ball.reset(-1)  # Reset ball position to the center, moving to the left
-            left_paddle.reset_speed()  # Reset left paddle speed
-            right_paddle.reset_speed()  # Reset right paddle speed
+            ball.reset(-1) 
+            left_paddle.reset_speed()
+            right_paddle.reset_speed()  
 
 
         # Speed increment logic
@@ -130,7 +113,7 @@ def main(game_mode=None):
             ball.increase_speed()
             left_paddle.increase_speed()
             right_paddle.increase_speed()
-            start_time = time.time()  # Reset the timer
+            start_time = time.time() 
         
 
         # Draw everything
@@ -144,22 +127,19 @@ def main(game_mode=None):
         screen.blit(right_text, (SCREEN_WIDTH * 3 // 4, 20))
         pygame.display.flip()
 
-        # Frame rate
         clock.tick(60)
 
-        # Check for winner
         if left_score >= 5 or right_score >= 5:
             winner = "Left Player" if left_score > right_score else "Right Player"
             result = show_end_screen(screen, f"{winner} Wins!")
             
             if result == "play_again":
-                main(game_mode)  # Restart the game
+                main(game_mode)
             elif result == "home":
-                main()  # Restart game flow
+                main() 
             elif result == "exit":
                 pygame.quit()
                 return
-
 
 if __name__ == "__main__":
     main()

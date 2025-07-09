@@ -3,10 +3,6 @@ from utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT, BLACK, WHITE, BLUE, GRE
 from utils.helper import draw_button
 
 def show_start_screen(screen):
-    """
-    Displays the start screen with options for Single Player and Two Players.
-    If Single Player is selected, shows control options (Mouse or Keyboard).
-    """
     font = pygame.font.Font(None, 74)
 
     # Main loop for start screen
@@ -28,14 +24,11 @@ def show_start_screen(screen):
                 return False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if single_player_button.collidepoint(event.pos):
-                    return show_control_selection(screen)  # Move to control selection
+                    return show_control_selection(screen)
                 elif two_player_button.collidepoint(event.pos):
                     return "two_players"
 
 def show_control_selection(screen):
-    """
-    Displays a screen to select control type for Single Player (Mouse or Keyboard).
-    """
     font = pygame.font.Font(None, 74)
 
     while True:

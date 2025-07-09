@@ -22,26 +22,16 @@ class Paddle(pygame.sprite.Sprite):
             self.rect.y = SCREEN_HEIGHT - PADDLE_HEIGHT
 
     def move_to(self, y):
-        """
-    Moves the paddle to the given vertical position (Y-coordinate).
-    Ensures the paddle stays within the screen bounds.
-    """
-        self.rect.y = y - PADDLE_HEIGHT // 2  # Center paddle on the given Y-coordinate
+        self.rect.y = y - PADDLE_HEIGHT // 2
         if self.rect.y < 0:
-            self.rect.y = 0  # Prevent moving above the screen
+            self.rect.y = 0 
         if self.rect.y > SCREEN_HEIGHT - PADDLE_HEIGHT:
-            self.rect.y = SCREEN_HEIGHT - PADDLE_HEIGHT  # Prevent moving below the screen
+            self.rect.y = SCREEN_HEIGHT - PADDLE_HEIGHT  
 
 
     def reset_speed(self):
-        """
-        Resets the paddle's speed to its initial value.
-        """
         self.speed = initial_paddle_speed
 
 
     def increase_speed(self):
-        """
-        Increases the paddle's speed by speed_increment.
-        """
         self.speed += speed_increment

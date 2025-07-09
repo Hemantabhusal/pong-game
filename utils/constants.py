@@ -14,10 +14,10 @@ PADDLE_WIDTH = 12
 PADDLE_HEIGHT = 85
 
 # Ball Dimensions
-BALL_SIZE = 16
+BALL_SIZE = 15
 
 # Speeds
-initial_ball_speed = 4.5
-initial_paddle_speed = 8
-speed_increment_time = 0.8
-speed_increment = 0.3
+initial_ball_speed = 5
+initial_paddle_speed = 9
+speed_increment_time = 0.9
+speed_increment = 0.4
